@@ -12,11 +12,11 @@ int main()
         {
         case 'O':
         {
-            int amount;
+            float amount;
             printf("Please insert amount to diposite:\n");
-            if(scanf(" %d",&amount)>1)
+            if(scanf(" %f",&amount)<1)
             {
-                printf("Failed to read ammount!\n");
+                printf("Failed to read ammount!\n\n");
                 continue;
             }
             openaccount(amount);
@@ -28,7 +28,12 @@ int main()
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n");
+                printf("Failed to read account number\n\n");
+                continue;
+            }
+            if(account<901 || account>950)
+            {
+                printf("False account number!\n\n");
                 continue;
             }
             checkbalance(account);
@@ -40,19 +45,19 @@ int main()
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n");
+                printf("Failed to read account number\n\n");
                 continue;
             }
             if(account<901 || account>950)
             {
-                printf("False account number!\n");
+                printf("False account number!\n\n");
                 continue;
             }
             float amount;
             printf("Please insert amount to diposite:\n");
             if(scanf(" %f",&amount)<1)
             {
-                printf("Failed to read ammount!\n");
+                printf("Failed to read ammount!\n\n");
                 continue;
             }
             deposite(account,amount);
@@ -65,19 +70,19 @@ int main()
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n");
+                printf("Failed to read account number\n\n");
                 continue;
             }
             if(account<901 || account>950)
             {
-                printf("False account number!\n");
+                printf("False account number!\n\n");
                 continue;
             }
             float amount;
             printf("Please insert amount to diposite:\n");
             if(scanf(" %f",&amount)<1)
             {
-                printf("Failed to read ammount!\n");
+                printf("Failed to read ammount!\n\n");
                 continue;
             }
             withdrawal(account,amount);
@@ -90,12 +95,12 @@ int main()
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n");
+                printf("Failed to read account number\n\n");
                 continue;
             }
             if(account<901 || account>950)
             {
-                printf("False account number!\n");
+                printf("False account number!\n\n");
                 continue;
             }
             closeaccount(account);
@@ -107,7 +112,7 @@ int main()
             int intr;
             if(scanf(" %d",&intr)<1)
             {
-                printf("False interest rate!\n");
+                printf("False interest rate!\n\n");
                 continue;
             }
             interest(intr);
@@ -119,8 +124,12 @@ int main()
             print();
         }
         break;
-
+        case 'E':
+        break;
         default:
+        {
+            printf("Invalid command!\n\n");
+        }
             break;
         }
     } while (command!='E');

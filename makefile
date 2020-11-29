@@ -12,7 +12,7 @@ myBank.o: myBank.c myBank.h
 main.o: main.c myBank.h
 	gcc -Wall -c main.c
 
-.PHONY: all clear
+.PHONY: all clean
 
-clear:
+clean:
 	rm *.o *.a *.exe
