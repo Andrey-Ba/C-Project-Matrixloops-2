@@ -6,17 +6,22 @@ int main()
     char command;
     do
     {
-        printf("Please choose a transaction type:\nO-Open Account\nB-Balance Inquiry\nD-Deposit\nW-Withdrawal\nC-Close Account\nI-Interest\nP-Print\nE-Exit\n");
+        printf("\nPlease choose a transaction type:\n O-Open Account\n B-Balance Inquiry\n D-Deposit\n W-Withdrawal\n C-Close Account\n I-Interest\n P-Print\n E-Exit\n");
         scanf(" %c",&command);
         switch (command)
         {
         case 'O':
         {
             float amount;
-            printf("Please insert amount to diposite:\n");
+            printf("Please enter amount for deposit: ");
             if(scanf(" %f",&amount)<1)
             {
-                printf("Failed to read ammount!\n\n");
+                printf("Failed to read the amount\n");
+                continue;
+            }
+            if(amount<0)
+            {
+                printf("Invalid Amount\n");
                 continue;
             }
             openaccount(amount);
@@ -24,16 +29,21 @@ int main()
             break;
         case 'B':
         {
-            printf("Please insert account number\n");
+            printf("Please enter account number: ");
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n\n");
+                printf("Failed to read the account number\n");
                 continue;
             }
             if(account<901 || account>950)
             {
-                printf("False account number!\n\n");
+                printf("Invalid account number\n");
+                continue;
+            }
+            if(isclosed(account))
+            {
+                printf("This account is closed\n");
                 continue;
             }
             checkbalance(account);
@@ -41,66 +51,87 @@ int main()
             break;
         case 'D':
         {
-            printf("Please insert account number\n");
+            printf("Please enter account number: ");
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n\n");
+                printf("Failed to read the account number\n");
                 continue;
             }
             if(account<901 || account>950)
             {
-                printf("False account number!\n\n");
+                printf("Invalid account number\n");
+                continue;
+            }
+            if(isclosed(account))
+            {
+                printf("This account is closed\n");
                 continue;
             }
             float amount;
-            printf("Please insert amount to diposite:\n");
+            printf("Please enter amount for deposit: ");
             if(scanf(" %f",&amount)<1)
             {
-                printf("Failed to read ammount!\n\n");
+                printf("Failed to read the amount\n");
                 continue;
             }
-            deposite(account,amount);
+            if(amount<0)
+            {
+                printf("Cannot deposit a negative amount\n");
+                continue;
+            }
+            deposit(account,amount);
         }
             break;
         
         case 'W':
         {
-            printf("Please insert account number\n");
+            printf("Please enter account number: ");
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n\n");
+                printf("Failed to read the account number\n");
                 continue;
             }
             if(account<901 || account>950)
             {
-                printf("False account number!\n\n");
+                printf("Invalid account number\n");
+                continue;
+            }
+            if(isclosed(account))
+            {
+                printf("This account is closed\n");
                 continue;
             }
             float amount;
-            printf("Please insert amount to diposite:\n");
+            printf("Please enter the amount to withdraw: ");
             if(scanf(" %f",&amount)<1)
             {
-                printf("Failed to read ammount!\n\n");
+                printf("Failed to read the amount\n");
                 continue;
             }
+            //By your tests I can withdraw negative..
+            // if(amount<0)
+            // {
+            //     printf("Invalid Amount\n");
+            //     continue;
+            // }
             withdrawal(account,amount);
         }
         break;
         
         case 'C':
         {
-            printf("Please insert account number\n");
+            printf("Please enter account number: ");
             int account=0;
             if(scanf(" %d",&account)<1)
             {
-                printf("Failed to read account number\n\n");
+                printf("Failed to read the account number\n");
                 continue;
             }
             if(account<901 || account>950)
             {
-                printf("False account number!\n\n");
+                printf("Invalid account number\n");
                 continue;
             }
             closeaccount(account);
@@ -110,9 +141,16 @@ int main()
         case 'I':
         {
             int intr;
+            printf("Please enter interest rate: ");
             if(scanf(" %d",&intr)<1)
             {
-                printf("False interest rate!\n\n");
+                printf("Failed to read the interest rate\n");
+                continue;
+            }
+            //By your test, can't use negative intrest rate
+            if(intr <0)
+            {
+                printf("Invalid interest rate\n");
                 continue;
             }
             interest(intr);
@@ -128,7 +166,7 @@ int main()
         break;
         default:
         {
-            printf("Invalid command!\n\n");
+            printf("Invalid transaction type\n");
         }
             break;
         }

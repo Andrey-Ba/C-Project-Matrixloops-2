@@ -20,55 +20,55 @@ void openaccount(float amount)
     }
     open_accounts[i]='o';
     accounts[i]=amount;
-    printf("Your account number is: %d\n\n", 901+i);
+    printf("New account number is: %d\n", 901+i);
 }
 
 void checkbalance(int account)
 {
     if(open_accounts[account-901]!='o')
     {
-        printf("Account number %d is closed!\n\n",account);
+        printf("This account is closed\n");
         return;
     }
-    printf("The balance of account number %d is: %0.2f\n\n",account,accounts[account-901]);
+    printf("The balance of account number %d is: %0.2f\n",account,accounts[account-901]);
 }
 
-void deposite(int account, float amount)
+void deposit(int account, float amount)
 {
     if(open_accounts[account-901]!='o')
     {
-        printf("Account number %d is closed!\n\n",account);
+        printf("This account is closed\n");
         return;
     }
     accounts[account-901] +=amount;
-    printf("Your new balance is: %0.2f\n\n", accounts[account-901]);
+    printf("The new balance is: %0.2f\n", accounts[account-901]);
 }
 
 void withdrawal(int account, float amount)
 {
     if(open_accounts[account-901]!='o')
     {
-        printf("Account number %d is closed!\n\n",account);
+        printf("This account is closed\n");
         return;
     }
     if(accounts[account-901]-amount<0)
     {
-        printf("You don't have enough in your balance!\n\n");
+        printf("Cannot withdraw more than the balance\n");
         return;
     }
     accounts[account-901]-=amount;
-    printf("Your new balance is: %0.2f\n\n",accounts[account-901]);
+    printf("The new balance is: %0.2f\n",accounts[account-901]);
 }
 
 void closeaccount(int account)
 {
     if(open_accounts[account-901]!='o')
     {
-        printf("Account number %d is already closed!\n\n",account);
+        printf("This account is already closed\n");
         return;
     }
     open_accounts[account-901]=0;
-    printf("Your account has been closed\n\n");
+    printf("Closed account number %d\n",account);
 }
 
 void interest(int interest)
@@ -80,7 +80,6 @@ void interest(int interest)
             accounts[i]=accounts[i]+(interest/100.0)*accounts[i];
         }
     }
-    printf("Interest rate applied successfuly\n\n");
 }
 
 void print()
@@ -89,8 +88,12 @@ void print()
     {
         if(open_accounts[i]=='o')
         {
-            printf("Account number %d with balance of: %0.2f\n",i+901,accounts[i]);
+            printf("The balance of account number %d is: %0.2f\n",i+901,accounts[i]);
         }
     }
-    printf(" \n");
+}
+
+int isclosed(int account)
+{
+    return open_accounts[account-901]!='o';
 }
